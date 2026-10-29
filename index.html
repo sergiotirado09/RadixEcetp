@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RADIxECETP | Gestión Académica</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div id="publicPage">
+    <header class="topbar">
+      <a class="brand" href="#">
+        <img class="brand-logo" src="assets/logo-radixecetp.png" alt="Logo de RADIxECETP">
+        <span>RADIxECETP<small>GESTIÓN ACADÉMICA</small></span>
+      </a>
+      <nav class="top-links">
+        <a href="#nosotros">Nosotros</a>
+        <a href="#acceso">Acceso institucional</a>
+        <a class="gold-btn" href="#acceso">Iniciar sesión ↗</a>
+      </nav>
+    </header>
+
+    <main class="landing">
+      <section>
+        <div class="eyebrow">PORTAL ACADÉMICO</div>
+        <h1>Tu información académica, en un solo lugar.</h1>
+        <p class="lead">Consulta calificaciones, sigue tu proceso académico y conecta a estudiantes, docentes y administración desde un espacio organizado.</p>
+        
+        <div class="actions">
+          <a href="#acceso" class="gold-btn">Ingresar a RADIxECETP →</a>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="feature-icon">▤</div>
+            <strong>Estudiantes</strong>
+            <p>Calificaciones, acudientes y anotaciones.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon">⌘</div>
+            <strong>Docentes</strong>
+            <p>Registro de notas y seguimiento.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon">▦</div>
+            <strong>Administración</strong>
+            <p>Usuarios, datos y estadísticas.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="acceso" class="login-card">
+        <div class="eyebrow">ACCESO INSTITUCIONAL</div>
+        <h2>Bienvenido</h2>
+        <p>Ingresa con tu documento y contraseña.</p>
+
+        <form id="loginForm">
+          <label for="loginUser">Documento o usuario</label>
+          <input id="loginUser" autocomplete="username" placeholder="Número de documento" required>
+          
+          <label for="loginPassword">Contraseña</label>
+          <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Tu contraseña" required>
+          
+          <button class="submit" type="submit">Iniciar sesión →</button>
+          
+          <div id="loginMessage" class="msg" aria-live="polite"></div>
+        </form>
+
+        <p class="small-note">Acceso institucional conectado al servicio académico. Solicita tu cuenta a la institución.</p>
+      </section>
+    </main>
+
+    <section id="nosotros" class="section">
+      <div class="container">
+        <h2>Sobre RADIxECETP</h2>
+        <p class="muted">RADIxECETP es una propuesta de gestión académica que busca facilitar el seguimiento estudiantil, el registro de calificaciones y la comunicación de la comunidad educativa.</p>
+        
+        <div class="cards">
+          <article class="card">
+            <h3>🎯 Nuestro propósito</h3>
+            <p>Organizar la información académica y apoyar el seguimiento del aprendizaje.</p>
+          </article>
+          <article class="card">
+            <h3>🤝 Nuestra comunidad</h3>
+            <p>Conectar a estudiantes, docentes, acudientes y personal administrativo.</p>
+          </article>
+          <article class="card">
+            <h3>💡 Innovación educativa</h3>
+            <p>Promover el uso responsable de herramientas digitales en la institución.</p>
+          </article>
+        </div>
+
+        <h2 class="space-top">Instituciones vinculadas</h2>
+        <div class="cards">
+          <article class="card">
+            <img class="institution-image" src="assets/Logo-ITM-01.png" alt="Logo ITM">
+            <h3>ITM</h3>
+            <p>La Institución Universitaria ITM se incluye en el contexto académico del proyecto RADIxECETP,
+                 aportando al desarrollo formativo de la propuesta a través de la Técnico Laboral en Asistencia En Soporte, Mantenimiento Y Visualización De Bases de Datos.</p>
+          </article>
+          <article class="card">
+            <img class="institution-image" src="assets/pinal.jpg" alt="Institución Educativa El Pinal">
+            <h3>Institución Educativa El Pinal</h3>
+            <p>RADIxECETP busca apoyar el seguimiento académico y organizar 
+                la información de estudiantes, docentes y acudientes de esta institución, 
+                ademas es el contexto académico del proyecto.</p>
+          </article>
+        </div>
+
+        <h2 class="space-top">Objetivos de Desarrollo Sostenible</h2>
+        <div class="cards ods-grid">
+          <article class="card">
+            <img class="ods-image" src="assets/ods4.png" alt="ODS 4">
+            <h3>Educación de calidad</h3>
+            <p>Apoya el seguimiento del aprendizaje y facilita la consulta
+                 de calificaciones para fortalecer el acompañamiento estudiantil.</p>
+          </article>
+          <article class="card">
+            <img class="ods-image" src="assets/ods9.png" alt="ODS 9">
+            <h3>Innovación e infraestructura</h3>
+            <p>Promueve herramientas digitales para
+                 organizar registros escolares y modernizar los procesos académicos.</p>
+          </article>
+          <article class="card">
+            <img class="ods-image" src="assets/ods16.png" alt="ODS 16">
+            <h3>Paz, justicia e instituciones sólidas</h3>
+            <p>Promueve una gestión educativa transparente, segura y responsable.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      RADIxECETP · Portal de gestión académica
+    </footer>
+  </div>
+
+  <div id="appPage" class="app hidden">
+    <header class="topbar app-topbar">
+      <a class="brand" href="#">
+        <img class="brand-logo" src="assets/logo-radixecetp.png" alt="Logo de RADIxECETP">
+        <span>RADIxECETP<small>GESTIÓN ACADÉMICA</small></span>
+      </a>
+      <div class="top-user">
+        <span id="headerName"></span>
+        <button class="secondary" id="logoutTop">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <div class="side-label">MENÚ PRINCIPAL</div>
+      <button class="side-link active" data-view="inicio">⌂ Inicio</button>
+      <button class="side-link" data-view="calificaciones">▤ Calificaciones y notas</button>
+      <button class="side-link" data-view="anotaciones">⚑ Anotaciones y apelaciones</button>
+      <button class="side-link" data-view="familia">♧ Padres y acudientes</button>
+      <button class="side-link" data-view="horarios">◷ Materias y grupos</button>
+      <button class="side-link" data-view="usuarios">▦ Base de datos interna</button>
+      <button class="side-link" data-view="perfil">◎ Mi perfil</button>
+      <div class="side-bottom">
+        <button class="side-link" id="logoutSide">↪ Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div id="viewContent"></div>
+      <footer class="footer">
+        RADIxECETP · Información académica institucional
+      </footer>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/api.js"></script>
+</body>
+</html>
