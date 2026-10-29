@@ -4,6 +4,9 @@ require('dotenv').config();
 
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+const { promisify } = require('util');
+const pbkdf2 = promisify(crypto.pbkdf2);
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
@@ -23,7 +26,58 @@ const cookieOptions = {
   maxAge: 8 * 60 * 60 * 1000
 };
 const pool = createDatabasePool();
+async function verifyStoredPassword(password, storedPassword) {
+  if (typeof storedPassword !== 'string') {
+    return false;
+  }
 
+  // Contraseñas guardadas con bcrypt
+  if (/^\$2[aby]\$\d{2}\$/.test(storedPassword)) {
+    return bcrypt.compare(password, storedPassword);
+  }
+
+  // Contraseñas guardadas con PBKDF2-SHA256 por el sistema original
+  if (storedPassword.startsWith('pbkdf2_sha256$')) {
+    try {
+      const [algorithm, iterationsText, saltHex, expectedHex] =
+        storedPassword.split('$');
+
+      const iterations = Number(iterationsText);
+
+      if (
+        algorithm !== 'pbkdf2_sha256' ||
+        !Number.isSafeInteger(iterations) ||
+        iterations < 1 ||
+        !/^(?:[0-9a-f]{2})+$/i.test(saltHex) ||
+        !/^(?:[0-9a-f]{2})+$/i.test(expectedHex)
+      ) {
+        return false;
+      }
+
+      const actual = await pbkdf2(
+        password,
+        Buffer.from(saltHex, 'hex'),
+        iterations,
+        Buffer.from(expectedHex, 'hex').length,
+        'sha256'
+      );
+
+      const expected = Buffer.from(expectedHex, 'hex');
+
+      return actual.length === expected.length &&
+        crypto.timingSafeEqual(actual, expected);
+    } catch {
+      return false;
+    }
+  }
+
+  // Compatibilidad temporal con contraseñas antiguas en texto normal
+  const provided = Buffer.from(password, 'utf8');
+  const stored = Buffer.from(storedPassword, 'utf8');
+
+  return provided.length === stored.length &&
+    crypto.timingSafeEqual(provided, stored);
+}
 if (!sessionSecret || sessionSecret.length < 32) {
   throw new Error('SESSION_SECRET debe tener al menos 32 caracteres.');
 }
@@ -96,10 +150,9 @@ app.post('/api/auth/login', loginLimiter, async (req, res, next) => {
     if (user && !['Administrador', 'Docente', 'Estudiante'].includes(user.rol)) {
       return res.status(403).json({ error: 'Este perfil aún no está habilitado para acceder al portal.' });
     }
-    const passwordMatches = user && /^\$2[aby]\$\d{2}\$/.test(user.contraseña)
-      ? await bcrypt.compare(password, user.contraseña)
-      : false;
-
+const passwordMatches = user
+  ? await verifyStoredPassword(password, user.contraseña)
+  : false;
     if (!passwordMatches || user.estado !== 'Activo') {
       return res.status(401).json({ error: 'El documento o la contraseña no coinciden.' });
     }
